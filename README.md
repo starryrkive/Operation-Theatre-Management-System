@@ -80,6 +80,15 @@ OTMS focuses on the operational coordination of surgeries and operation theatre 
 
 The initial project documentation consists of the SRS, SAD, and STP. Application development, implementation, and testing will proceed according to the requirements and design specifications.
 
+## Roles Assigned
+
+| Role                                   | Name      |
+|----------------------------------------|-----------|
+| QA Lead                                | Sudhiksha |
+| Development Lead                       | Suravi    |
+| OT Coordinator / Domain Representative | Praneetha |
+| Product Owner                          | Shesanth  |
+
 ---
 
 *Academic Software Engineering Mini-Project — Operation Theatre Management System (OTMS).*
