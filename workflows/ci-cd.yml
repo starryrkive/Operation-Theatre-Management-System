@@ -1,0 +1,43 @@
+name: OTMS CI
+
+on:
+  push:
+    branches: [main, master, develop]
+  pull_request:
+    branches: [main, master, develop]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build-and-test:
+    name: Build and test OTMS backend
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+          cache: maven
+
+      - name: Make Maven wrapper executable
+        run: |
+          if [ -f ./mvnw ]; then chmod +x ./mvnw; fi
+
+      - name: Build and run tests
+        run: |
+          if [ -f ./mvnw ]; then
+            ./mvnw --batch-mode --no-transfer-progress clean verify
+          elif [ -f ./pom.xml ]; then
+            mvn --batch-mode --no-transfer-progress clean verify
+          else
+            echo "Could not find mvnw or pom.xml at the repository root."
+            echo "Update this workflow if the Spring Boot backend is in a subdirectory or uses Gradle."
+            exit 1
+          fi
